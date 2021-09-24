@@ -1,7 +1,7 @@
 import React from 'react';
 import { Text, View } from 'react-native';
 
-const Home = () => {
+const Prescriptions = () => {
   return (
     <View
       style={{
@@ -14,4 +14,4 @@ const Home = () => {
   );
 };
 
-export default Home;
+export default Prescriptions;
