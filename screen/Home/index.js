@@ -85,14 +85,6 @@ const Home = ({navigation}) => {
     return <View style={styles.ItemSperatorView} />;
   };
 
-  const onFocus = () => {
-    return setIsFocusSearchBar(true);
-  };
-
-  const onBlur = () => {
-    return setIsFocusSearchBar(false);
-  }
-
   return (
     <SafeAreaView style={styles.SafeAreaView}>
       <TextInput
@@ -100,7 +92,6 @@ const Home = ({navigation}) => {
         value={searchWord}
         onChangeText={text => searchFilter(text)}
         placeholder="약을 검색해 보세요"
-        onFocus={() => onFocus()}
       />
       <View style={isFocusSearchBar ? styles.Hidden : styles.Container}>
         <FlatList
@@ -144,8 +135,9 @@ const styles = {
     backgroundColor: '#c8c8c8',
   },
   TextInput: {
-    flex: 1,
-    height: 40,
+    flex: 0.1,
+    height: 100,
+    padding: 0,
     borderWidth: 1,
     paddingLeft: 20,
     margin: 5,
