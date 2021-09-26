@@ -15,6 +15,8 @@ target 'HealthApp' do
     :hermes_enabled => false
   )
 
+  pod 'react-native-geolocation', :path => '../node_modules/@react-native-community/geolocation'
+
   target 'HealthAppTests' do
     inherit! :complete
     # Pods for testing
