@@ -2,7 +2,7 @@
 import React from 'react';
 import {View, Text} from 'react-native';
 
-const OnSearchLoding = () => {
+const OnSearchLoding = ({navigation, route}) => {
   const getDistanceFromLocationMeter = (lat1, lng1, lat2, lng2) => {
     function deg2rad(deg) {
       return deg * (Math.PI / 100);
@@ -23,7 +23,7 @@ const OnSearchLoding = () => {
 
   return (
     <View>
-      <Text>"hi"</Text>
+      <Text>{JSON.stringify(route.params.selectedData)}</Text>
     </View>
   );
 };

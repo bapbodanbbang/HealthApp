@@ -120,8 +120,7 @@ const Home = ({navigation}) => {
         style={styles.Button}
         title="근처 약국에 물어보기"
         onPress={() => {
-          console.log(selectedData);
-          navigation.navigate('OnSearchLoding');
+          navigation.navigate('OnSearchLoding', {selectedData});
         }}
       />
     </SafeAreaView>
