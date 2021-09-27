@@ -5,6 +5,7 @@ import 'react-native-gesture-handler';
 import Home from './screen/Home';
 import Prescriptions from './screen/Prescriptions';
 import PrescriptionDetail from './screen/PrescriptionDetail';
+import OnSearchLoding from './screen/OnSearchLoding';
 import Map from './screen/Map';
 
 // import 'react-native-gesture-handler';
@@ -21,6 +22,7 @@ const App = () => {
           component={PrescriptionDetail}
         />
         <Stack.Screen name="Map" component={Map} />
+        <Stack.Screen name="OnSearchLoding" component={OnSearchLoding} />
       </Stack.Navigator>
     </NavigationContainer>
   );

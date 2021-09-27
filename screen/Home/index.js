@@ -139,6 +139,7 @@ const Home = ({navigation}) => {
         title="근처 약국에 물어보기"
         onPress={() => {
           console.log(selectedData);
+          navigation.navigate('OnSearchLoding');
         }}
       />
     </SafeAreaView>
