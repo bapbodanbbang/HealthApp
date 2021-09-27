@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react';
+import React, {useState, useEffect,useRef} from 'react';
 import {
   Text,
   View,
@@ -15,6 +15,7 @@ const Home = ({navigation}) => {
   const [masterData, setMasterData] = useState([]);
   const [selectedData, setSelectedData] = useState([]);
   const [isFocusSearchBar, setIsFocusSearchBar] = useState(false);
+  const textInputFocusRef = useRef();
 
   const fetchData = () => {
     const json = [
@@ -74,6 +75,8 @@ const Home = ({navigation}) => {
             title="Select"
             onPress={value => {
               setSelectedData([...selectedData, item]);
+              setIsFocusSearchBar(false);
+              textInputFocusRef.current.blur();
             }}
           />
         </View>
@@ -92,6 +95,10 @@ const Home = ({navigation}) => {
         value={searchWord}
         onChangeText={text => searchFilter(text)}
         placeholder="약을 검색해 보세요"
+        onFocus={() => {
+          setIsFocusSearchBar(true);
+        }}
+        ref={textInputFocusRef}
       />
       <View style={isFocusSearchBar ? styles.Hidden : styles.Container}>
         <FlatList
