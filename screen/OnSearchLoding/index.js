@@ -3,6 +3,24 @@ import React from 'react';
 import {View, Text} from 'react-native';
 
 const OnSearchLoding = ({navigation, route}) => {
+  const pharmacyList = [
+    {
+      title: 'A',
+      lat: 1,
+      lng: 1,
+    },
+    {
+      title: 'B',
+      lat: 3,
+      lng: 3,
+    },
+    {
+      title: 'D',
+      lat: 2,
+      lng: 2,
+    },
+  ];
+
   const getDistanceFromLocationMeter = (lat1, lng1, lat2, lng2) => {
     function deg2rad(deg) {
       return deg * (Math.PI / 100);
@@ -19,6 +37,10 @@ const OnSearchLoding = ({navigation, route}) => {
     var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
     var d = R * c * 1000; // Distance in m
     return d;
+  };
+
+  const getPharmacyByMedicine = medecineList => {
+    
   };
 
   return (
