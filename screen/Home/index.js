@@ -1,4 +1,4 @@
-import React, {useState, useEffect,useRef} from 'react';
+import React, {useState, useEffect, useRef} from 'react';
 import {
   Text,
   View,
@@ -116,7 +116,13 @@ const Home = ({navigation}) => {
           renderItem={ItemView}
         />
       </View>
-      <Button style={styles.Button} title="근처 약국에 물어보기" />
+      <Button
+        style={styles.Button}
+        title="근처 약국에 물어보기"
+        onPress={() => {
+          console.log(selectedData);
+        }}
+      />
     </SafeAreaView>
   );
 };
