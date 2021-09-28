@@ -43,7 +43,10 @@ const Pharmacies = ({navigation}) => {
 
   const ItemView = ({item}) => {
     return (
-      <TouchableWithoutFeedback>
+      <TouchableWithoutFeedback
+        onPress={() => {
+          navigation.navigate('PharmacyDetail', {selectedPharmacyData});
+        }}>
         <View style={styles.ItemView}>
           <Image
             style={styles.PharmacyImage}
@@ -132,7 +135,8 @@ const styles = {
     height: 20,
     width: 20,
     marginRight: 10,
-  }
+    zIndex: 1,
+  },
 };
 
 export default Pharmacies;
