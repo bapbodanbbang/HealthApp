@@ -139,8 +139,9 @@ const styles = {
   ItemView: {
     flex: 1,
     flexDirection: 'row',
-    justifyContent: 'center',
+    justifyContent: 'space-between',
     alignItems: 'center',
+    margin: 10,
   },
   ItemSperatorView: {
     height: 0.5,
