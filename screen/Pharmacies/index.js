@@ -45,7 +45,7 @@ const Pharmacies = ({navigation}) => {
     return (
       <TouchableWithoutFeedback
         onPress={() => {
-          navigation.navigate('PharmacyDetail', {selectedPharmacyData});
+          navigation.navigate('PharmacyDetail');
         }}>
         <View style={styles.ItemView}>
           <Image
@@ -59,7 +59,7 @@ const Pharmacies = ({navigation}) => {
             <TouchableOpacity
               style={styles.TouchableOpacity}
               onPress={() => {
-                navigation.navigate('Map', {selectedPharmacyData});
+                navigation.navigate('Map');
               }}>
               <Image
                 style={styles.MapViewIcon}

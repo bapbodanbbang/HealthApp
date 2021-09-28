@@ -44,7 +44,7 @@ const OnSearchLoding = ({navigation, route}) => {
   };
 
   return (
-    <View>
+    <View onLayout={() => {navigation.navigate('Pharmacies');}}>
       <Text>{JSON.stringify(route.params.selectedData)}</Text>
     </View>
   );

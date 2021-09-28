@@ -42,7 +42,7 @@ const PharmacyDetail = ({navigation}) => {
         <TouchableOpacity
           style={styles.TouchableOpacity}
           onPress={() => {
-            navigation.navigate('Map', {selectedPharmacyData});
+            navigation.navigate('Map');
           }}>
           <Image
             style={styles.MapViewIcon}
