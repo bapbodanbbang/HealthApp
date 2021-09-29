@@ -9,6 +9,7 @@ import OnSearchLoding from './screen/OnSearchLoding';
 import Map from './screen/Map';
 import Pharmacies from './screen/Pharmacies';
 import PharmacyDetail from './screen/PharmacyDetail';
+import Address from './screen/Address';
 
 // import 'react-native-gesture-handler';
 const Stack = createStackNavigator();
@@ -17,7 +18,7 @@ const App = () => {
   return (
     <NavigationContainer>
       <Stack.Navigator
-        initialRouteName="Home"
+        initialRouteName="Address"
         screenOptions={{
           headerShown: false,
         }}>
@@ -31,6 +32,7 @@ const App = () => {
         <Stack.Screen name="OnSearchLoding" component={OnSearchLoding} />
         <Stack.Screen name="Pharmacies" component={Pharmacies} />
         <Stack.Screen name="PharmacyDetail" component={PharmacyDetail} />
+        <Stack.Screen name="Address" component={Address} />
       </Stack.Navigator>
     </NavigationContainer>
   );

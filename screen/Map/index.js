@@ -4,15 +4,33 @@ import {View} from 'react-native';
 import MapView, {Marker} from 'react-native-maps';
 import Geolocation from '@react-native-community/geolocation';
 
-const Map = () => {
-  const [locations, setLocations] = useState([]);
-  let _watchId;
+const Map = ({route, navigation}) => {
+  console.log(route.params.locationX && route.params.locationY);
 
+  const [locations, setLocations] = useState([
+    route.params.locationX && route.params.locationY
+      ? {
+          latitude: Number(route.params.locationX),
+          longitude: Number(route.params.locationY),
+        }
+      : null,
+  ]);
+
+  let _watchId;
   useEffect(() => {
     _watchId = Geolocation.watchPosition(
       position => {
         const {latitude, longitude} = position.coords;
-        setLocations([...locations, {latitude, longitude}]);
+        setLocations([
+          {
+            latitude: route.params.locationX
+              ? Number(route.params.locationX)
+              : latitude,
+            longitude: route.params.locationY
+              ? Number(route.params.locationY)
+              : longitude,
+          },
+        ]);
       },
       error => {
         console.log(error);
@@ -45,15 +63,16 @@ const Map = () => {
             latitudeDelta: 0.02,
             longitudeDelta: 0.015,
           }}>
-          {locations.map((location, index) => (
-            <Marker
+          {locations.map((location, index) => {
+            console.log(location);
+            return (<Marker
               key={`location-${index}`}
               coordinate={{
                 latitude: location.latitude,
                 longitude: location.longitude,
               }}
-            />
-          ))}
+            />);
+          })}
         </MapView>
       )}
     </View>
