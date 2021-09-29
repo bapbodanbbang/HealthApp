@@ -7,6 +7,8 @@ import {
   SafeAreaView,
   TextInput,
   TouchableWithoutFeedback,
+  Dimensions,
+  Image,
 } from 'react-native';
 
 const Home = ({navigation}) => {
@@ -15,6 +17,7 @@ const Home = ({navigation}) => {
   const [masterData, setMasterData] = useState([]);
   const [selectedData, setSelectedData] = useState([]);
   const [isFocusSearchBar, setIsFocusSearchBar] = useState(false);
+  const [isClickPrescriptionText, setIsClickPrescriptionText] = useState(false);
   const textInputFocusRef = useRef();
 
   const fetchData = () => {
@@ -100,22 +103,34 @@ const Home = ({navigation}) => {
         }}
         ref={textInputFocusRef}
       />
-      <View style={isFocusSearchBar ? styles.Hidden : styles.Container}>
-        <FlatList
-          data={selectedData}
-          keyExtractor={(item, index) => index.toString()}
-          ItemSeparatorComponent={ItemSperatorView}
-          renderItem={SeletedItemView}
-        />
+      <View style={styles.SearchByPrescription}>
+        <Text
+          style={styles.PrescriptionText}
+          onPress={() => {
+            setIsClickPrescriptionText(true);
+          }}>
+          처방전으로 약 검색
+        </Text>
       </View>
-      <View style={isFocusSearchBar ? styles.Container : styles.Hidden}>
-        <FlatList
-          data={filterData}
-          keyExtractor={(item, index) => index.toString()}
-          ItemSeparatorComponent={ItemSperatorView}
-          renderItem={ItemView}
-        />
-      </View>
+      {isFocusSearchBar ? (
+        <View style={isFocusSearchBar ? styles.Container : styles.Hidden}>
+          <FlatList
+            data={filterData}
+            keyExtractor={(item, index) => index.toString()}
+            ItemSeparatorComponent={ItemSperatorView}
+            renderItem={ItemView}
+          />
+        </View>
+      ) : (
+        <View style={styles.Container}>
+          <FlatList
+            data={selectedData}
+            keyExtractor={(item, index) => index.toString()}
+            ItemSeparatorComponent={ItemSperatorView}
+            renderItem={SeletedItemView}
+          />
+        </View>
+      )}
       <Button
         style={styles.Button}
         title="근처 약국에 물어보기"
@@ -123,12 +138,33 @@ const Home = ({navigation}) => {
           navigation.navigate('OnSearchLoding', {selectedData});
         }}
       />
+      {isClickPrescriptionText && (
+        <View style={styles.PrescriptionPopupBackGround}>
+          <View style={styles.PrescriptionPopup}>
+            <Text>처방전으로 약 검색</Text>
+            <Text>
+              사진 촬영 및 파일 업로드를 통해 처방전을 직접 등록하세요. *파일
+              형식: pdf
+            </Text>
+          </View>
+          <Image
+            style={styles.PrescriptionImage}
+            source={{
+              uri: 'https://reactnative.dev/img/tiny_logo.png',
+            }}
+          />
+          <View style={styles.PrescriptionPopupButton}>
+            <Button title="test1" />
+            <Button title="test2" />
+          </View>
+        </View>
+      )}
     </SafeAreaView>
   );
 };
 
 const styles = {
-  SafeAreaView: {flex: 1},
+  SafeAreaView: {flex: 1, backgroundColor: 'white'},
   Container: {
     flex: 1,
     backgroundColor: 'white',
@@ -167,6 +203,29 @@ const styles = {
     height: 0,
     width: 0,
   },
+  SearchByPrescription: {
+    position: 'relative',
+    backgroundColor: 'white',
+    height: 50,
+  },
+  PrescriptionText: {
+    position: 'absolute',
+    textDecorationLine: 'underline',
+    top: 10,
+    right: 10,
+  },
+  PrescriptionPopup: {
+    backgroundColor: 'white',
+    position: 'absolute',
+    height: 400,
+    bottom: 0,
+  },
+  PrescriptionPopupButton: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+  },
+  PrescriptionImage: {height: 150, width: '100%'},
 };
 
 export default Home;
