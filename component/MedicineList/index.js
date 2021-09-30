@@ -5,7 +5,11 @@ import {
   Text,
   Button,
   FlatList,
+  TouchableOpacity,
+  Image,
 } from 'react-native';
+
+import deleteIcon from '../../images/delete.png';
 
 const SearchMedicineList = props => {
   const [searchWord, setSearchWord] = useState('');
@@ -32,17 +36,23 @@ const SearchMedicineList = props => {
 
   const ItemView = ({item}) => {
     return (
-      <TouchableWithoutFeedback>
+      <TouchableWithoutFeedback
+        onPress={value => {
+          props.setSelectedData([...props.selectedData, item]);
+          props.setIsFocusSearchBar(false);
+          props.textInputFocusRef.current.blur();
+        }}>
         <View style={styles.searchItemView}>
           <Text style={styles.Item}>{item.title}</Text>
-          <Button
-            title="Select"
+          {/* <TouchableOpacity
+            style={styles.TouchableOpacity}
             onPress={value => {
               props.setSelectedData([...props.selectedData, item]);
               props.setIsFocusSearchBar(false);
               props.textInputFocusRef.current.blur();
-            }}
-          />
+            }}>
+            <Image source={deleteIcon} />
+          </TouchableOpacity> */}
         </View>
       </TouchableWithoutFeedback>
     );
@@ -65,14 +75,16 @@ const SeletecMedicineLIst = props => {
     return (
       <View style={styles.ItemView}>
         <Text style={styles.Item}>{item.title}</Text>
-        <Button
-          title="Delete"
+
+        <TouchableOpacity
+          style={styles.TouchableOpacity}
           onPress={() => {
             props.setSelectedData(
               props.selectedData.filter(value => value.id !== item.id),
             );
-          }}
-        />
+          }}>
+          <Image source={deleteIcon} />
+        </TouchableOpacity>
       </View>
     );
   };
@@ -116,6 +128,9 @@ const styles = {
     padding: 15,
   },
   FlatList: {marginRight: 15, marginLeft: 15, borderWidth: 0},
+  TouchableOpacity: {
+    marginRight: 10,
+  },
 };
 
 export {SearchMedicineList, SeletecMedicineLIst};

@@ -10,6 +10,7 @@ import backgroundImage from '../../images/Group1435.png';
 import SearchButton from '../../component/SearchButton';
 
 const Home = ({navigation}) => {
+  const [location, setLocation] = useState('강동구 길동 347-30');
   const [searchWord, setSearchWord] = useState('');
   const [filterData, setFilterData] = useState([]);
   const [masterData, setMasterData] = useState([]);
@@ -31,7 +32,8 @@ const Home = ({navigation}) => {
     setMasterData(json);
   };
 
-  const onPress = () => navigation.navigate('OnSearchLoding', selectedData);
+  const onPressSearchPharmacies = () => navigation.navigate('OnSearchLoding', selectedData);
+  const onPressSearchAddress = () => navigation.navigate('Address');
 
   const searchFilter = text => {
     if (text) {
@@ -57,7 +59,7 @@ const Home = ({navigation}) => {
 
   return (
     <SafeAreaView style={styles.SafeAreaView}>
-      <Header />
+      <Header location={location} onPressSearchAddress={onPressSearchAddress}/>
       <TextInput
         style={styles.TextInput}
         value={searchWord}
@@ -97,7 +99,7 @@ const Home = ({navigation}) => {
           <Image source={backgroundImage} style={styles.backgroundImage} />
         </View>
       )}
-      <SearchButton onPress={onPress} />
+      <SearchButton onPress={onPressSearchPharmacies} />
       {isClickPrescriptionText && <PrescriptionPopup />}
     </SafeAreaView>
   );
