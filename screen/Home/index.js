@@ -1,21 +1,13 @@
 import React, {useState, useEffect, useRef} from 'react';
-import {
-  Text,
-  View,
-  Button,
-  FlatList,
-  SafeAreaView,
-  TextInput,
-  TouchableWithoutFeedback,
-  TouchableOpacity,
-  Image,
-} from 'react-native';
+import {Text, View, SafeAreaView, TextInput, Image} from 'react-native';
 import Header from '../../component/Header';
 import PrescriptionPopup from '../../component/PrescriptionPopup';
-
+import {
+  SearchMedicineList,
+  SeletecMedicineLIst,
+} from '../../component/MedicineList';
 import backgroundImage from '../../images/Group1435.png';
-// import locationImage from '../../images/ic_map_pin.png';
-// import myPageIcon from '../../images/btn_mypage.png';
+import SearchButton from '../../component/SearchButton';
 
 const Home = ({navigation}) => {
   const [searchWord, setSearchWord] = useState('');
@@ -39,6 +31,8 @@ const Home = ({navigation}) => {
     setMasterData(json);
   };
 
+  const onPress = () => navigation.navigate('OnSearchLoding', selectedData);
+
   const searchFilter = text => {
     if (text) {
       const newData = masterData.filter(item => {
@@ -61,42 +55,6 @@ const Home = ({navigation}) => {
     return () => {};
   }, []);
 
-  const SeletedItemView = ({item}) => {
-    return (
-      <View style={styles.ItemView}>
-        <Text style={styles.Item}>{item.title}</Text>
-        <Button
-          title="Delete"
-          onPress={() => {
-            setSelectedData(selectedData.filter(value => value.id !== item.id));
-          }}
-        />
-      </View>
-    );
-  };
-
-  const ItemView = ({item}) => {
-    return (
-      <TouchableWithoutFeedback>
-        <View style={styles.ItemView}>
-          <Text style={styles.Item}>{item.title}</Text>
-          <Button
-            title="Select"
-            onPress={value => {
-              setSelectedData([...selectedData, item]);
-              setIsFocusSearchBar(false);
-              textInputFocusRef.current.blur();
-            }}
-          />
-        </View>
-      </TouchableWithoutFeedback>
-    );
-  };
-
-  const ItemSperatorView = () => {
-    return <View style={styles.ItemSperatorView} />;
-  };
-
   return (
     <SafeAreaView style={styles.SafeAreaView}>
       <Header />
@@ -110,47 +68,36 @@ const Home = ({navigation}) => {
         }}
         ref={textInputFocusRef}
       />
-      <View style={styles.SearchByPrescription}>
-        <Text
-          style={styles.PrescriptionText}
-          onPress={() => {
-            setIsClickPrescriptionText(true);
-          }}>
-          처방전으로 약 검색
-        </Text>
-      </View>
+      {!isFocusSearchBar ? (
+        <View style={styles.SearchByPrescription}>
+          <Text
+            style={styles.PrescriptionText}
+            onPress={() => {
+              setIsClickPrescriptionText(true);
+            }}>
+            처방전으로 약 검색
+          </Text>
+        </View>
+      ) : null}
       {isFocusSearchBar ? (
-        <View style={styles.Container}>
-          <FlatList
-            data={filterData}
-            keyExtractor={(item, index) => index.toString()}
-            ItemSeparatorComponent={ItemSperatorView}
-            renderItem={ItemView}
-          />
-        </View>
+        <SearchMedicineList
+          selectedData={selectedData}
+          setSelectedData={setSelectedData}
+          setIsFocusSearchBar={setIsFocusSearchBar}
+          textInputFocusRef={textInputFocusRef}
+          searchFilter={searchFilter}
+        />
       ) : selectedData.length ? (
-        <View style={styles.Container}>
-          <FlatList
-            data={selectedData}
-            keyExtractor={(item, index) => index.toString()}
-            ItemSeparatorComponent={ItemSperatorView}
-            renderItem={SeletedItemView}
-          />
-        </View>
+        <SeletecMedicineLIst
+          setSelectedData={setSelectedData}
+          selectedData={selectedData}
+        />
       ) : (
         <View style={styles.backgroundImageView}>
           <Image source={backgroundImage} style={styles.backgroundImage} />
         </View>
       )}
-      <View style={{flex: 0.1, justifyContent: 'center', alignItems: 'center'}}>
-        <TouchableOpacity
-          style={styles.TouchableOpacity}
-          onPress={() => {
-            navigation.navigate('OnSearchLoding', {selectedData});
-          }}>
-          <Text style={styles.SearchText}>근처 약국에 물어보기</Text>
-        </TouchableOpacity>
-      </View>
+      <SearchButton onPress={onPress} />
       {isClickPrescriptionText && <PrescriptionPopup />}
     </SafeAreaView>
   );
@@ -158,20 +105,6 @@ const Home = ({navigation}) => {
 
 const styles = {
   SafeAreaView: {flex: 1, backgroundColor: 'white'},
-  Container: {
-    flex: 1,
-    backgroundColor: 'white',
-  },
-  Item: {
-    padding: 15,
-  },
-  ItemView: {
-    flex: 1,
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-    margin: 10,
-  },
   ItemSperatorView: {
     height: 0.5,
     width: '100%',
@@ -189,16 +122,6 @@ const styles = {
     borderColor: '#EDEFF1',
     backgroundColor: '#F4F6F8',
   },
-  TouchableOpacity: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    width: 270,
-    height: 200,
-    bottom: 50,
-    backgroundColor: '#4285FF',
-    borderRadius: 10,
-  },
   Hidden: {
     height: 0,
     width: 0,
@@ -215,10 +138,6 @@ const styles = {
   },
   backgroundImage: {
     flex: 0.4,
-  },
-  SearchText: {
-    fontSize: 15,
-    color: '#FFFFFF',
   },
   PrescriptionText: {
     position: 'absolute',
