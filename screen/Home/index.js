@@ -10,10 +10,11 @@ import {
   TouchableOpacity,
   Image,
 } from 'react-native';
+import Header from '../../component/Header';
 
 import backgroundImage from '../../images/Group1435.png';
-import locationImage from '../../images/ic_map_pin.png';
-import myPageIcon from '../../images/btn_mypage.png';
+// import locationImage from '../../images/ic_map_pin.png';
+// import myPageIcon from '../../images/btn_mypage.png';
 
 const Home = ({navigation}) => {
   const [searchWord, setSearchWord] = useState('');
@@ -97,21 +98,7 @@ const Home = ({navigation}) => {
 
   return (
     <SafeAreaView style={styles.SafeAreaView}>
-      <View
-        style={{
-          flex: 0.1,
-          flexDirection: 'row',
-          alignItems: 'center',
-          justifyContent: 'space-between',
-          marginLeft: 30,
-          marginRight: 30,
-        }}>
-        <View style={{flexDirection: 'row', alignItems: 'center'}}>
-          <Image style={{marginRight: 5}} source={locationImage} />
-          <Text> 서울특별시 강동구 길동 347-30 </Text>
-        </View>
-        <Image source={myPageIcon} />
-      </View>
+      <Header />
       <TextInput
         style={styles.TextInput}
         value={searchWord}
@@ -132,7 +119,7 @@ const Home = ({navigation}) => {
         </Text>
       </View>
       {isFocusSearchBar ? (
-        <View style={isFocusSearchBar ? styles.Container : styles.Hidden}>
+        <View style={styles.Container}>
           <FlatList
             data={filterData}
             keyExtractor={(item, index) => index.toString()}
@@ -243,7 +230,7 @@ const styles = {
   PrescriptionText: {
     position: 'absolute',
     textDecorationLine: 'underline',
-    color: "#4285FF",
+    color: '#4285FF',
     right: 25,
   },
   PrescriptionPopup: {
