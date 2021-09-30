@@ -7,9 +7,13 @@ import {
   SafeAreaView,
   TextInput,
   TouchableWithoutFeedback,
-  Dimensions,
+  TouchableOpacity,
   Image,
 } from 'react-native';
+
+import backgroundImage from '../../images/Group1435.png';
+import locationImage from '../../images/ic_map_pin.png';
+import myPageIcon from '../../images/btn_mypage.png';
 
 const Home = ({navigation}) => {
   const [searchWord, setSearchWord] = useState('');
@@ -93,6 +97,21 @@ const Home = ({navigation}) => {
 
   return (
     <SafeAreaView style={styles.SafeAreaView}>
+      <View
+        style={{
+          flex: 0.1,
+          flexDirection: 'row',
+          alignItems: 'center',
+          justifyContent: 'space-between',
+          marginLeft: 30,
+          marginRight: 30,
+        }}>
+        <View style={{flexDirection: 'row', alignItems: 'center'}}>
+          <Image style={{marginRight: 5}} source={locationImage} />
+          <Text> 서울특별시 강동구 길동 347-30 </Text>
+        </View>
+        <Image source={myPageIcon} />
+      </View>
       <TextInput
         style={styles.TextInput}
         value={searchWord}
@@ -121,7 +140,7 @@ const Home = ({navigation}) => {
             renderItem={ItemView}
           />
         </View>
-      ) : (
+      ) : selectedData.length ? (
         <View style={styles.Container}>
           <FlatList
             data={selectedData}
@@ -130,14 +149,20 @@ const Home = ({navigation}) => {
             renderItem={SeletedItemView}
           />
         </View>
+      ) : (
+        <View style={styles.backgroundImageView}>
+          <Image source={backgroundImage} style={styles.backgroundImage} />
+        </View>
       )}
-      <Button
-        style={styles.Button}
-        title="근처 약국에 물어보기"
-        onPress={() => {
-          navigation.navigate('OnSearchLoding', {selectedData});
-        }}
-      />
+      <View style={{flex: 0.1, justifyContent: 'center', alignItems: 'center'}}>
+        <TouchableOpacity
+          style={styles.TouchableOpacity}
+          onPress={() => {
+            navigation.navigate('OnSearchLoding', {selectedData});
+          }}>
+          <Text style={styles.SearchText}>근처 약국에 물어보기</Text>
+        </TouchableOpacity>
+      </View>
       {isClickPrescriptionText && (
         <View style={styles.PrescriptionPopupBackGround}>
           <View style={styles.PrescriptionPopup}>
@@ -185,19 +210,26 @@ const styles = {
     backgroundColor: '#c8c8c8',
   },
   TextInput: {
-    flex: 0.1,
-    height: 100,
-    padding: 0,
+    flex: 0.08,
     borderWidth: 1,
     paddingLeft: 20,
-    margin: 5,
-    borderColor: '#009688',
-    backgroundColor: 'white',
+    marginTop: 10,
+    marginBottom: 20,
+    marginRight: 25,
+    marginLeft: 25,
+    borderRadius: 10,
+    borderColor: '#EDEFF1',
+    backgroundColor: '#F4F6F8',
   },
-  Button: {
+  TouchableOpacity: {
     flex: 1,
-    position: 'absolute',
-    buttom: 0,
+    justifyContent: 'center',
+    alignItems: 'center',
+    width: 270,
+    height: 200,
+    bottom: 50,
+    backgroundColor: '#4285FF',
+    borderRadius: 10,
   },
   Hidden: {
     height: 0,
@@ -211,8 +243,8 @@ const styles = {
   PrescriptionText: {
     position: 'absolute',
     textDecorationLine: 'underline',
-    top: 10,
-    right: 10,
+    color: "#4285FF",
+    right: 25,
   },
   PrescriptionPopup: {
     backgroundColor: 'white',
@@ -226,6 +258,18 @@ const styles = {
     alignItems: 'center',
   },
   PrescriptionImage: {height: 150, width: '100%'},
+  backgroundImageView: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  backgroundImage: {
+    flex: 0.4,
+  },
+  SearchText: {
+    fontSize: 15,
+    color: '#FFFFFF'
+  }
 };
 
 export default Home;
