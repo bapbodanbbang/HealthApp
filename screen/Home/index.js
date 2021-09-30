@@ -11,6 +11,7 @@ import {
   Image,
 } from 'react-native';
 import Header from '../../component/Header';
+import PrescriptionPopup from '../../component/PrescriptionPopup';
 
 import backgroundImage from '../../images/Group1435.png';
 // import locationImage from '../../images/ic_map_pin.png';
@@ -150,27 +151,7 @@ const Home = ({navigation}) => {
           <Text style={styles.SearchText}>근처 약국에 물어보기</Text>
         </TouchableOpacity>
       </View>
-      {isClickPrescriptionText && (
-        <View style={styles.PrescriptionPopupBackGround}>
-          <View style={styles.PrescriptionPopup}>
-            <Text>처방전으로 약 검색</Text>
-            <Text>
-              사진 촬영 및 파일 업로드를 통해 처방전을 직접 등록하세요. *파일
-              형식: pdf
-            </Text>
-          </View>
-          <Image
-            style={styles.PrescriptionImage}
-            source={{
-              uri: 'https://reactnative.dev/img/tiny_logo.png',
-            }}
-          />
-          <View style={styles.PrescriptionPopupButton}>
-            <Button title="test1" />
-            <Button title="test2" />
-          </View>
-        </View>
-      )}
+      {isClickPrescriptionText && <PrescriptionPopup />}
     </SafeAreaView>
   );
 };
@@ -227,24 +208,6 @@ const styles = {
     backgroundColor: 'white',
     height: 50,
   },
-  PrescriptionText: {
-    position: 'absolute',
-    textDecorationLine: 'underline',
-    color: '#4285FF',
-    right: 25,
-  },
-  PrescriptionPopup: {
-    backgroundColor: 'white',
-    position: 'absolute',
-    height: 400,
-    bottom: 0,
-  },
-  PrescriptionPopupButton: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-  },
-  PrescriptionImage: {height: 150, width: '100%'},
   backgroundImageView: {
     flex: 1,
     justifyContent: 'center',
@@ -255,8 +218,14 @@ const styles = {
   },
   SearchText: {
     fontSize: 15,
-    color: '#FFFFFF'
-  }
+    color: '#FFFFFF',
+  },
+  PrescriptionText: {
+    position: 'absolute',
+    textDecorationLine: 'underline',
+    color: '#4285FF',
+    right: 25,
+  },
 };
 
 export default Home;
