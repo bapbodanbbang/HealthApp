@@ -9,8 +9,12 @@ import {
   Image,
   TextInput,
 } from 'react-native';
+import Header from '../../component/Header';
 
-const Pharmacies = ({navigation}) => {
+const Pharmacies = ({route, navigation}) => {
+
+  console.log(route.params.location);
+
   const pharmaciesData = [
     {
       title: '약국A',
@@ -29,13 +33,6 @@ const Pharmacies = ({navigation}) => {
       score: '평점 : 5',
     },
   ];
-
-  const selectedPharmacyData = {
-    title: '약국A',
-    distance: '거리 : 100m',
-    score: '평점 : 5',
-    tag: '#친절해요',
-  };
 
   const ItemSperatorView = () => {
     return <View style={styles.ItemSperatorView} />;
@@ -78,7 +75,7 @@ const Pharmacies = ({navigation}) => {
 
   return (
     <SafeAreaView style={styles.SafeAreaView}>
-      <TextInput style={styles.TextInput} placeholder="약을 검색해 보세요" />
+      <Header location={route.params.location} />
       <FlatList
         data={pharmaciesData}
         keyExtractor={(item, index) => index.toString()}

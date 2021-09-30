@@ -10,10 +10,13 @@ import backgroundImage from '../../images/Group1435.png';
 import SearchButton from '../../component/SearchButton';
 
 const Home = ({route, navigation}) => {
+
+  console.log(111,route.params);
+
   const [location, setLocation] = useState(
     route.params && route.params.location.address_name
       ? route.params.location.address_name
-      : '강동구 길동 347-30',
+      : '주소 입력',
   );
   const [searchWord, setSearchWord] = useState('');
   const [filterData, setFilterData] = useState([]);
@@ -36,8 +39,14 @@ const Home = ({route, navigation}) => {
     setMasterData(json);
   };
 
-  const onPressSearchPharmacies = () => navigation.navigate('OnSearchLoding', selectedData);
+  const onPressSearchPharmacies = () => navigation.navigate('Pharmacies', {selectedData, location});
   const onPressSearchAddress = () => navigation.navigate('Address');
+
+  const forceUpdate = () => {
+    if (route.params && route.params.location.address_name) {
+      setLocation(route.params.location.address_name);
+    }
+  };
 
   const searchFilter = text => {
     if (text) {
@@ -55,6 +64,10 @@ const Home = ({route, navigation}) => {
       setSearchWord(text);
     }
   };
+
+  useEffect(() => {
+    forceUpdate();
+  });
 
   useEffect(() => {
     fetchData();
