@@ -10,9 +10,6 @@ import backgroundImage from '../../images/Group1435.png';
 import SearchButton from '../../component/SearchButton';
 
 const Home = ({route, navigation}) => {
-
-  console.log(111,route.params);
-
   const [location, setLocation] = useState(
     route.params && route.params.location.address_name
       ? route.params.location.address_name
