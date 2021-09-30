@@ -25,6 +25,8 @@ const Header = props => {
 
 const styles = {
   HeaderView: {
+    marginTop: 10,
+    marginBottom: 10,
     flex: 0.1,
     flexDirection: 'row',
     alignItems: 'center',

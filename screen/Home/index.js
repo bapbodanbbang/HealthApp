@@ -130,7 +130,6 @@ const styles = {
     flex: 0.08,
     borderWidth: 1,
     paddingLeft: 20,
-    marginTop: 10,
     marginBottom: 20,
     marginRight: 25,
     marginLeft: 25,
