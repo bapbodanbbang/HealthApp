@@ -5,11 +5,7 @@ import {View, Text, SafeAreaView} from 'react-native';
 
 import Postcode from 'react-native-daum-postcode';
 
-const API_KEY = '9d0926f24a6ced01ea1997feba8bea03';
-
 const Address = ({navigation}) => {
-  const [location, setLocation] = useState({});
-
   return (
     <SafeAreaView style={{flex: 1}}>
       <View style={{flex: 1, alignItems: 'center', justifyContent: 'center'}}>
@@ -27,16 +23,7 @@ const Address = ({navigation}) => {
                 },
               )
               .then(res => {
-                const locationObj = res.data.documents[0];
-                setLocation({
-                  locationX: locationObj.address.x,
-                  locationY: locationObj.address.y,
-                });
-
-                navigation.navigate('Map', {
-                    locationX: locationObj.address.x,
-                    locationY: locationObj.address.y,
-                  });
+                navigation.navigate('Home', {location: res.data.documents[0]});
               });
           }}
         />

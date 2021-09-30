@@ -12,7 +12,6 @@ import {
 import deleteIcon from '../../images/delete.png';
 
 const SearchMedicineList = props => {
-  const [searchWord, setSearchWord] = useState('');
   const [filterData, setFilterData] = useState([]);
   const [masterData, setMasterData] = useState([]);
 

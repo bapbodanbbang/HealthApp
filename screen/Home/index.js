@@ -9,8 +9,12 @@ import {
 import backgroundImage from '../../images/Group1435.png';
 import SearchButton from '../../component/SearchButton';
 
-const Home = ({navigation}) => {
-  const [location, setLocation] = useState('강동구 길동 347-30');
+const Home = ({route, navigation}) => {
+  const [location, setLocation] = useState(
+    route.params && route.params.location.address_name
+      ? route.params.location.address_name
+      : '강동구 길동 347-30',
+  );
   const [searchWord, setSearchWord] = useState('');
   const [filterData, setFilterData] = useState([]);
   const [masterData, setMasterData] = useState([]);
