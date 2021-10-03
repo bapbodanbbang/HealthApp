@@ -17,24 +17,24 @@ const Pharmacies = ({route, navigation}) => {
   const pharmaciesData = [
     {
       id: 1,
-      title: '약국A',
+      title: '이즈타워약국',
       distance: '거리 100m',
-      score: '5',
+      score: '4.9',
       tag: ['친절해요'],
     },
     {
       id: 2,
-      title: '약국B',
+      title: '코코온누리약국',
       distance: '거리 100m',
-      score: '5',
+      score: '4.1',
       tag: ['친절해요', '또 가고 싶어요'],
     },
     {
       id: 3,
-      title: '약국C',
+      title: '와이약국',
       distance: '거리 100m',
       score: '5',
-      tag: [],
+      tag: ['쾌적해요', '빠른 약 조제'],
     },
   ];
 
@@ -64,7 +64,18 @@ const Pharmacies = ({route, navigation}) => {
             <View style={styles.TagView}>
               {item.tag.length
                 ? item.tag.map((value, index) => {
-                    return <Text style={styles.Tag}>{value}</Text>;
+                    return (
+                      <View
+                        style={{
+                          margin: 2,
+                          borderColor: '#94ABC8',
+                          borderRadius: 5,
+                          borderWidth: 1,
+                          backgroundColor: '#94ABC8',
+                        }}>
+                        <Text style={styles.Tag}>{value}</Text>
+                      </View>
+                    );
                   })
                 : null}
             </View>
@@ -103,6 +114,8 @@ const styles = {
     marginBottom: 5,
   },
   Title: {
+    fontSize: 15,
+    fontWeight: 'bold',
     marginTop: 10,
     marginLeft: 5,
   },
@@ -131,6 +144,7 @@ const styles = {
   Distance: {
     fontSize: 10,
     paddingLeft: 5,
+    paddingTop: 5,
     paddingBottom: 10,
     color: '#898989',
   },
@@ -143,12 +157,8 @@ const styles = {
     flexDirection: 'row',
   },
   Tag: {
-    backgroundColor: '#94ABC8',
     color: 'white',
     margin: 3,
-    padding: 4,
-    borderRadius: 100,
-    textAlign: 'center',
   },
 };
 

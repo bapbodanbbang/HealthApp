@@ -18,8 +18,8 @@ import onProgress from '../../images/onProgress.png';
 
 const PharmacyDetail = ({navigation}) => {
   const pharmacyData = {
-    title: '약국A',
-    phone: '010-5193-9519',
+    title: '이즈타워약국',
+    phone: '02-501-9478',
     imageUri: 'https://reactnative.dev/img/tiny_logo.png',
     location: '서울특별시 연세로 2나길 61',
     schedule: [],
@@ -68,36 +68,36 @@ const PharmacyDetail = ({navigation}) => {
         <View>
           <Text style={styles.Time_Text}>영업시간</Text>
           <View style={styles.OnPregress}>
-            <Text style={styles.OnProgress_Text}>09:00 ~ 18:00</Text>
+            <Text style={styles.OnProgress_Text}>10:00 ~ 15:00</Text>
             <Image source={onProgress} />
           </View>
           <View style={styles.WeeklySchedule}>
             <View style={styles.ScheduleView}>
               <View style={styles.ScheduleDetail}>
                 <Text style={styles.ScheduleText}>월</Text>
-                <Text style={styles.ScheduleTime}>09:00 ~ 18:00</Text>
+                <Text style={styles.ScheduleTime}>10:00 ~ 15:00</Text>
               </View>
               <View style={styles.ScheduleDetail}>
                 <Text style={styles.ScheduleText}>화</Text>
-                <Text style={styles.ScheduleTime}>09:00 ~ 18:00</Text>
+                <Text style={styles.ScheduleTime}>10:00 ~ 15:00</Text>
               </View>
             </View>
             <View style={styles.BlankLine}></View>
             <View style={styles.ScheduleView}>
               <View style={styles.ScheduleDetail}>
                 <Text style={styles.ScheduleText}>수</Text>
-                <Text style={styles.ScheduleTime}>09:00 ~ 18:00</Text>
+                <Text style={styles.ScheduleTime}>10:00 ~ 15:00</Text>
               </View>
               <View style={styles.ScheduleDetail}>
                 <Text style={styles.ScheduleText}>목</Text>
-                <Text style={styles.ScheduleTime}>09:00 ~ 18:00</Text>
+                <Text style={styles.ScheduleTime}>10:00 ~ 15:00</Text>
               </View>
             </View>
             <View style={styles.BlankLine}></View>
             <View style={styles.ScheduleView}>
               <View style={styles.ScheduleDetail}>
                 <Text style={styles.ScheduleText}>금</Text>
-                <Text style={styles.ScheduleTime}>09:00 ~ 18:00</Text>
+                <Text style={styles.ScheduleTime}>10:00 ~ 15:00</Text>
               </View>
               <View style={styles.ScheduleDetail}>
                 <Text style={styles.ScheduleSaturDay}>토</Text>
@@ -108,7 +108,7 @@ const PharmacyDetail = ({navigation}) => {
             <View style={styles.ScheduleView}>
               <View style={styles.ScheduleDetail}>
                 <Text style={styles.ScheduleHoliDay}>일</Text>
-                <Text style={styles.ScheduleTime}>09:00 ~ 18:00</Text>
+                <Text style={styles.ScheduleTime}>휴무</Text>
               </View>
               <View style={styles.ScheduleDetail}>
                 <Text style={styles.ScheduleHoliDay}>공휴일</Text>
