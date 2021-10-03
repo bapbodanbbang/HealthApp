@@ -12,27 +12,6 @@ import {
 import deleteIcon from '../../images/delete.png';
 
 const SearchMedicineList = props => {
-  const [filterData, setFilterData] = useState([]);
-  const [masterData, setMasterData] = useState([]);
-
-  const fetchData = () => {
-    const medicines = [
-      {id: 1, title: '타이레놀'},
-      {id: 2, title: '케토톱'},
-      {id: 3, title: '후시딘'},
-      {id: 4, title: '마데카솔'},
-      {id: 5, title: '게보린'},
-      {id: 6, title: '알보칠'},
-    ];
-    setFilterData(medicines);
-    setMasterData(medicines);
-  };
-
-  useEffect(() => {
-    fetchData();
-    return () => {};
-  }, []);
-
   const ItemView = ({item}) => {
     return (
       <TouchableWithoutFeedback
@@ -43,15 +22,6 @@ const SearchMedicineList = props => {
         }}>
         <View style={styles.searchItemView}>
           <Text style={styles.Item}>{item.title}</Text>
-          {/* <TouchableOpacity
-            style={styles.TouchableOpacity}
-            onPress={value => {
-              props.setSelectedData([...props.selectedData, item]);
-              props.setIsFocusSearchBar(false);
-              props.textInputFocusRef.current.blur();
-            }}>
-            <Image source={deleteIcon} />
-          </TouchableOpacity> */}
         </View>
       </TouchableWithoutFeedback>
     );
@@ -60,7 +30,7 @@ const SearchMedicineList = props => {
   return (
     <View style={styles.Container}>
       <FlatList
-        data={filterData}
+        data={props.filterData}
         keyExtractor={(item, index) => index.toString()}
         renderItem={ItemView}
         style={styles.FlatList}

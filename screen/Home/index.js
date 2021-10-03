@@ -54,6 +54,9 @@ const Home = ({route, navigation}) => {
         const textData = text.toUpperCase();
         return itemData.indexOf(textData) > -1;
       });
+      
+      console.log(newData);
+
       setFilterData(newData);
       setSearchWord(text);
     } else {
@@ -98,6 +101,7 @@ const Home = ({route, navigation}) => {
       {isFocusSearchBar ? (
         <SearchMedicineList
           selectedData={selectedData}
+          filterData={filterData}
           setSelectedData={setSelectedData}
           setIsFocusSearchBar={setIsFocusSearchBar}
           textInputFocusRef={textInputFocusRef}

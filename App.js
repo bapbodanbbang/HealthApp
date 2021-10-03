@@ -10,15 +10,13 @@ import Map from './screen/Map';
 import Pharmacies from './screen/Pharmacies';
 import PharmacyDetail from './screen/PharmacyDetail';
 import Address from './screen/Address';
-
-// import 'react-native-gesture-handler';
 const Stack = createStackNavigator();
 
 const App = () => {
   return (
     <NavigationContainer>
       <Stack.Navigator
-        initialRouteName="PharmacyDetail"
+        initialRouteName="Home"
         screenOptions={{
           headerShown: false,
         }}>
