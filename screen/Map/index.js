@@ -1,9 +1,11 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, {useEffect, useState} from 'react';
-import {View} from 'react-native';
+import {Image, SafeAreaView, Text, View} from 'react-native';
 import MapView, {Marker} from 'react-native-maps';
 import Geolocation from '@react-native-community/geolocation';
 import Header from '../../component/Header';
+import {TouchableOpacity} from 'react-native-gesture-handler';
+import goBackIcon from '../../images/goBack.png';
 
 const Map = ({route, navigation}) => {
   const [locations, setLocations] = useState([
@@ -46,6 +48,32 @@ const Map = ({route, navigation}) => {
 
   return (
     <View style={{flex: 1}}>
+      <View
+        style={{
+          top: 30,
+          left: 20,
+          height: 100,
+          flexDirection: 'row',
+          alignItems: 'center',
+          justifyContent: 'center',
+          backgroundColor: 'transparent',
+        }}>
+        <TouchableOpacity onPress={() => navigation.goBack()}>
+          <Image
+            style={{width: 30, height: 30, marginBottom: 30, marginRight: 120}}
+            source={goBackIcon}
+          />
+        </TouchableOpacity>
+        <Text
+          style={{
+            textAlign: 'center',
+            fontSize: 25,
+            marginRight: 200,
+            marginBottom: 30,
+          }}>
+          지도
+        </Text>
+      </View>
       {locations.length > 0 && (
         <MapView
           style={{flex: 1}}
@@ -56,7 +84,6 @@ const Map = ({route, navigation}) => {
             longitudeDelta: 0.01,
           }}>
           {locations.map((location, index) => {
-            console.log(location);
             return (
               <Marker
                 key={`location-${index}`}
